@@ -1,0 +1,10 @@
+TWIKeyboard	KEYWORD1
+changeAddress	KEYWORD2
+clear	KEYWORD2
+
+setLed	KEYWORD2
+pulseLed	KEYWORD2
+dimLed	KEYWORD2
+
+getKeyUp	KEYWORD2
+getKeyDown	KEYWORD2
