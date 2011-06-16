@@ -48,7 +48,7 @@ void loop()
       keyb.dimLed(LED3, 90);
     else if(keydown & BUTTON4)
       keyb.dimLed(LED3, 0);
-    else if(keydown & BUTTON3)
+    else if(keydown & BUTTON5)
       keyb.setLed(LED3, 0);
   }
   

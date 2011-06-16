@@ -50,7 +50,8 @@ void init(void)
 	
 	_delay_ms(1);
 	// Check for magic reset sequence
-	if (~BUTTON_PIN & (_BV(BUTTON1_BIT) | _BV(BUTTON2_BIT) | _BV(BUTTON5_BIT)))
+	if ((~BUTTON_PIN & (_BV(BUTTON1_BIT) | _BV(BUTTON2_BIT) | _BV(BUTTON5_BIT))) ==
+			(_BV(BUTTON1_BIT) | _BV(BUTTON2_BIT) | _BV(BUTTON5_BIT)))
 	{
 		// Do a reset
 		init_EEPROM();
@@ -173,21 +174,21 @@ void main(void)
 		keydown = getKeyDown();
 		if (keydown)
 		{
-			if (keydown & _BV(BUTTON1_BIT))
+			if (keydown & _BV(BUTTON1))
 				set_brightness(LED3, 100);
-			else if (keydown & _BV(BUTTON2_BIT))
+			else if (keydown & _BV(BUTTON2))
 				set_brightness(LED3, 60);
-			else if (keydown & _BV(BUTTON3_BIT))
+			else if (keydown & _BV(BUTTON3))
 				dim_led(LED3, 90);
-			else if (keydown & _BV(BUTTON4_BIT))
+			else if (keydown & _BV(BUTTON4))
 				dim_led(LED3, 0);
-			else if (keydown & _BV(BUTTON5_BIT))
+			else if (keydown & _BV(BUTTON5))
 				set_brightness(LED3, 0);
 		}
 		keyup = getKeyUp();
 		if (keyup)
 		{
-			if (keyup & _BV(BUTTON2_BIT))
+			if (keyup & _BV(BUTTON2))
 				set_brightness(LED3, 0);
 		}
 	}
