@@ -32,7 +32,7 @@ TWIKeyboard keyb(CURRENT_ADDR);
 void setup()
 {
   Wire.begin();
-  keyb.clear();
+  keyb.reset();
 
   keyb.setLed(0,100); // Turn on LED1
   keyb.changeAddress(NEW_ADDR);

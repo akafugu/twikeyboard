@@ -41,6 +41,7 @@ public:
 
   void changeAddress(int new_addr);
   void clear();
+  void reset(void);
   
   void setLed(uint8_t nr, uint8_t brightness);
   void pulseLed(uint8_t nr, bool on);

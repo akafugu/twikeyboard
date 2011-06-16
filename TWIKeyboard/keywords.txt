@@ -1,6 +1,7 @@
 TWIKeyboard	KEYWORD1
 changeAddress	KEYWORD2
 clear	KEYWORD2
+reset	KEYWORD2
 
 setLed	KEYWORD2
 pulseLed	KEYWORD2

@@ -57,7 +57,7 @@ void    usiTwiTransmitByte( uint8_t );
 uint8_t usiTwiReceiveByte( void );
 bool    usiTwiDataInReceiveBuffer( void );
 
-
+void flushTwiBuffers( void );
 
 /********************************************************************************
 

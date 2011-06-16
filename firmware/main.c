@@ -141,6 +141,12 @@ void processTWI( void )
 	case 0x91: // get KeyDown Event
 		usiTwiTransmitByte(getKeyDown());
 		break;
+	case 0xFE: // reset to known state
+		led_clear();
+		flushTwiBuffers();
+		break;
+	case 0xFF: // flush the bus
+		break;
 	default:
 		break;
 	}

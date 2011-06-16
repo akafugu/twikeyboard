@@ -270,27 +270,30 @@ static volatile uint8_t txTail;
 
 
 
-// flushes the TWI buffers
-
-static
-void
-flushTwiBuffers(
-  void
-)
-{
-  rxTail = 0;
-  rxHead = 0;
-  txTail = 0;
-  txHead = 0;
-} // end flushTwiBuffers
-
-
-
 /********************************************************************************
 
                                 public functions
 
 ********************************************************************************/
+
+
+
+
+// flushes the TWI buffers
+
+void
+flushTwiBuffers(
+  void
+)
+{
+  cli();
+  asm volatile("nop\n\tnop\n\tnop\n\tnop\n\t" ::); // Wait 4 clock cycles to make sure interupts are off
+  rxTail = 0;
+  rxHead = 0;
+  txTail = 0;
+  txHead = 0;
+  sei();
+} // end flushTwiBuffers
 
 
 

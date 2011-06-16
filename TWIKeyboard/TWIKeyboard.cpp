@@ -30,8 +30,24 @@ void TWIKeyboard::changeAddress(int new_addr)
 
 void TWIKeyboard::clear()
 {
+	// Send clear command
 	Wire.beginTransmission(m_addr);
 	Wire.send(0x82); // clear
+	Wire.endTransmission();	
+}
+
+void TWIKeyboard::reset(void)
+{
+	// Clear the buffer
+	Wire.beginTransmission(m_addr);
+	Wire.send(0xFF);
+	Wire.send(0xFF);
+	Wire.send(0xFF);
+	Wire.send(0xFF);
+	Wire.endTransmission();
+	// Send reset command
+	Wire.beginTransmission(m_addr);
+	Wire.send(0xFE); // clear
 	Wire.endTransmission();	
 }
 

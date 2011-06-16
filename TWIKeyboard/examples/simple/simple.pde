@@ -28,7 +28,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("Keyboard Test");
 
-  keyb.clear();
+  keyb.reset();
   keyb.setLed(LED1, 100);
   keyb.pulseLed(LED2, 1);
 }
