@@ -82,6 +82,15 @@ void TWIKeyboard::dimLed(uint8_t nr, uint8_t brightness)
 
 /* ---- */
 
+void TWIKeyboard::setKeyRepeat(uint8_t button, uint8_t mode)
+{
+	Wire.beginTransmission(m_addr);
+	Wire.send(0x92);
+	Wire.send(button);
+	Wire.send(mode);
+	Wire.endTransmission();
+}
+
 uint8_t TWIKeyboard::getKeyUp()
 {
 	uint8_t rdata = 0;

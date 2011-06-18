@@ -21,8 +21,19 @@
 #define sbi(var, mask)   ((var) |= (uint8_t)(1 << mask))
 #define cbi(var, mask)   ((var) &= (uint8_t)~(1 << mask))
 
+typedef enum BUTTON_KEYREPEAT_STATE {
+	KEYREPEAT_STOP = 0,
+	KEYREPEAT_SLOW = 1,
+	KEYREPEAT_MEDIUMSLOW = 2,
+	KEYREPEAT_MEDIUM = 3,
+	KEYREPEAT_MEDIUMFAST = 4,
+	KEYREPEAT_FAST = 5
+} BUTTON_KEYREPEAT_STATE;
+
 void button_init(void);
 void button_timer(void);
+void set_keyrepeat(uint8_t button, uint8_t state);
+void process_keyrepeat(void);
 
 uint8_t getKeyDown(void);
 uint8_t getKeyUp(void);

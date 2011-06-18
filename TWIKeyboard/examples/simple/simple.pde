@@ -31,6 +31,8 @@ void setup()
   keyb.reset();
   keyb.setLed(LED1, 100);
   keyb.pulseLed(LED2, 1);
+  keyb.setKeyRepeat(BUTTON1, KEYREPEAT_MEDIUM);
+  keyb.setKeyRepeat(BUTTON2, KEYREPEAT_FAST);
 }
 
 void loop()
@@ -40,15 +42,15 @@ void loop()
   {
     Serial.print("Keydown event: 0b");
     Serial.println(keydown, BIN);
-    if (keydown & BUTTON1)
+    if (keydown & _BV(BUTTON1))
       keyb.setLed(LED3, 100);
-    else if(keydown & BUTTON2)
+    else if(keydown & _BV(BUTTON2))
       keyb.setLed(LED3, 60);
-    else if(keydown & BUTTON3)
+    else if(keydown & _BV(BUTTON3))
       keyb.dimLed(LED3, 90);
-    else if(keydown & BUTTON4)
+    else if(keydown & _BV(BUTTON4))
       keyb.dimLed(LED3, 0);
-    else if(keydown & BUTTON5)
+    else if(keydown & _BV(BUTTON5))
       keyb.setLed(LED3, 0);
   }
   
@@ -57,7 +59,7 @@ void loop()
   {
     Serial.print("Keyup event: 0b");
     Serial.println(keyup, BIN);
-    if (keyup & BUTTON1)
+    if (keyup & _BV(BUTTON1))
       keyb.setLed(LED3, 0);
   }
 }

@@ -19,13 +19,13 @@
 #include <WProgram.h>
 #include <../Wire/Wire.h>
 
-#define BUTTON1 0x01
-#define BUTTON2 0x02
-#define BUTTON3 0x04
-#define BUTTON4 0x08
-#define BUTTON5 0x10
-#define BUTTON6 0x20
-#define BUTTON7 0x40
+#define BUTTON1 0
+#define BUTTON2 1
+#define BUTTON3 2
+#define BUTTON4 3
+#define BUTTON5 4
+#define BUTTON6 5
+#define BUTTON7 6
 
 #define LED1 0
 #define LED2 1
@@ -33,6 +33,12 @@
 #define LED4 3
 #define LED5 4
 
+#define KEYREPEAT_STOP 0
+#define KEYREPEAT_SLOW 1
+#define KEYREPEAT_MEDIUMSLOW 2
+#define KEYREPEAT_MEDIUM 3
+#define KEYREPEAT_MEDIUMFAST 4
+#define KEYREPEAT_FAST 5
 
 class TWIKeyboard
 {
@@ -47,6 +53,7 @@ public:
   void pulseLed(uint8_t nr, bool on);
   void dimLed(uint8_t nr, uint8_t brightness);
 
+  void setKeyRepeat(uint8_t button, uint8_t mode);
   uint8_t getKeyUp();
   uint8_t getKeyDown();
   

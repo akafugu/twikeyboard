@@ -141,8 +141,12 @@ void processTWI( void )
 	case 0x91: // get KeyDown Event
 		usiTwiTransmitByte(getKeyDown());
 		break;
+	case 0x92: // set keyrepeat
+		set_keyrepeat(usiTwiReceiveByte(),usiTwiReceiveByte());
+		break;
 	case 0xFE: // reset to known state
 		led_clear();
+		button_init();
 		flushTwiBuffers();
 		break;
 	case 0xFF: // flush the bus
@@ -161,6 +165,7 @@ void main(void)
 	while (1) {
 		while (usiTwiDataInReceiveBuffer())	{ // process I2C command
 			processTWI();
+			process_keyrepeat();
 		}
 	}
 }
