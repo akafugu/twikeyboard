@@ -28,7 +28,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("Keyboard Test");
 
-  keyb.reset();
+  keyb.begin();
   keyb.setLed(LED1, 100);
   keyb.pulseLed(LED2, 1);
   keyb.setKeyRepeat(BUTTON1, KEYREPEAT_MEDIUM);

@@ -36,7 +36,7 @@ void TWIKeyboard::clear()
 	Wire.endTransmission();	
 }
 
-void TWIKeyboard::reset(void)
+void TWIKeyboard::begin()
 {
 	// Clear the buffer
 	Wire.beginTransmission(m_addr);
@@ -47,35 +47,35 @@ void TWIKeyboard::reset(void)
 	Wire.endTransmission();
 	// Send reset command
 	Wire.beginTransmission(m_addr);
-	Wire.send(0xFE); // clear
+	Wire.send(0xFE); // reset
 	Wire.endTransmission();	
 }
 
 /* --- */
 
-void TWIKeyboard::setLed(uint8_t nr, uint8_t brightness)
+void TWIKeyboard::setLed(uint8_t no, uint8_t brightness)
 {
 	Wire.beginTransmission(m_addr);
 	Wire.send(0x83);
-	Wire.send(nr);
+	Wire.send(no);
 	Wire.send(brightness);
 	Wire.endTransmission();
 }
 
-void TWIKeyboard::pulseLed(uint8_t nr, bool on)
+void TWIKeyboard::pulseLed(uint8_t no, bool on)
 {
 	Wire.beginTransmission(m_addr);
 	Wire.send(0x84);
-	Wire.send(nr);
+	Wire.send(no);
 	Wire.send((uint8_t)on);
 	Wire.endTransmission();
 }
 
-void TWIKeyboard::dimLed(uint8_t nr, uint8_t brightness)
+void TWIKeyboard::dimLed(uint8_t no, uint8_t brightness)
 {
 	Wire.beginTransmission(m_addr);
 	Wire.send(0x85);
-	Wire.send(nr);
+	Wire.send(no);
 	Wire.send(brightness);
 	Wire.endTransmission();
 }

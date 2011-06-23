@@ -45,18 +45,56 @@ class TWIKeyboard
 public:
   TWIKeyboard(int addr);
 
-  void changeAddress(int new_addr);
-  void clear();
-  void reset(void);
-  
-  void setLed(uint8_t nr, uint8_t brightness);
-  void pulseLed(uint8_t nr, bool on);
-  void dimLed(uint8_t nr, uint8_t brightness);
+  /** Reset everything to power-on state. Should be called in the setup function */
+  void begin();
 
-  void setKeyRepeat(uint8_t button, uint8_t mode);
-  uint8_t getKeyUp();
-  uint8_t getKeyDown();
+  /** Change the TWI address of the keyboard. Once the address has been changed, power must be toggled before it will respond to the new address
+   * @param new_addr The new TWI address to set
+  */
+  void changeAddress(int new_addr);
   
+  /** Turns off all leds */
+  void clearLeds();
+  
+  /** Set a Led to a specified brightness
+   * @param no Number of the Led to change brighness for. Use LED1, LED2 or LED3 for the built-in Leds, and LED4 or LED5 for the external Leds.
+   * @param brightness The desired brightness from 0 (off) to 100 (max)
+   *
+   * If the Led is currently pulsing, the pulsing will be turned off.
+   */
+  void setLed(uint8_t no, uint8_t brightness);
+  
+  /** Set a Led to pulse
+   * @param no Number of the Led to set to pulse. LED1 to LED5.
+   * @param on Set to true to turn pulsing on, or false to turn off. When turning dimming off, the Led will be turned off.
+   */
+  void pulseLed(uint8_t no, bool on);
+
+  /** Dim or increase brightness of a Led
+   * @param no Number of the led to dim or increase brightness off. LED1 to LED5.
+   * @param brightness The desired brightness. If the Led is currently above this brightness, it will be gradually dimmed. If it is less, brightness will gradually increase.
+   *
+   * If the Led is currently pulsing, the brightness will be dimmed or boosted until it matches the current value, and then pulsing will be turned off. 
+   */
+  void dimLed(uint8_t no, uint8_t brightness);
+
+  /** Set whether or not a key has key repeat funtionalty when being held down
+   * @param button The button to change, BUTTON1 to BUTTON7
+   * @mode mode Sets the desired key repeat state
+   *   KEYREPEAT_STOP No key repeat
+   *   KEYREPEAT_SLOW Slow key repeat rate
+   *   KEYREPEAT_MEDIUMSLOW Medium-slow repeat rate
+   *   KEYREPEAT_MEDIUM Medium repeat rate
+   *   KEYREPEAT_MEDIUMFAST Medium-fast repeat rate
+   *   KEYREPEAT_FAST Fast repeat rate
+   */
+  void setKeyRepeat(uint8_t button, uint8_t mode);
+  
+  /** Get key up event state for all keys */
+  uint8_t getKeyUp();
+  
+  /** Get key down event state for all keys*/
+  uint8_t getKeyDown();
 private:
   int m_addr;
 };
