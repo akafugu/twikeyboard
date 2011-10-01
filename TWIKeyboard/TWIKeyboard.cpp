@@ -23,16 +23,16 @@ TWIKeyboard::TWIKeyboard(int addr)
 void TWIKeyboard::changeAddress(int new_addr)
 {
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x81); // change address
-	Wire.send(new_addr);
+	Wire.write(0x81); // change address
+	Wire.write(new_addr);
 	Wire.endTransmission();
 }
 
-void TWIKeyboard::clear()
+void TWIKeyboard::clearLeds()
 {
 	// Send clear command
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x82); // clear
+	Wire.write(0x82); // clear
 	Wire.endTransmission();	
 }
 
@@ -40,14 +40,14 @@ void TWIKeyboard::begin()
 {
 	// Clear the buffer
 	Wire.beginTransmission(m_addr);
-	Wire.send(0xFF);
-	Wire.send(0xFF);
-	Wire.send(0xFF);
-	Wire.send(0xFF);
+	Wire.write(0xFF);
+	Wire.write(0xFF);
+	Wire.write(0xFF);
+	Wire.write(0xFF);
 	Wire.endTransmission();
 	// Send reset command
 	Wire.beginTransmission(m_addr);
-	Wire.send(0xFE); // reset
+	Wire.write(0xFE); // reset
 	Wire.endTransmission();	
 }
 
@@ -56,27 +56,27 @@ void TWIKeyboard::begin()
 void TWIKeyboard::setLed(uint8_t no, uint8_t brightness)
 {
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x83);
-	Wire.send(no);
-	Wire.send(brightness);
+	Wire.write(0x83);
+	Wire.write(no);
+	Wire.write(brightness);
 	Wire.endTransmission();
 }
 
 void TWIKeyboard::pulseLed(uint8_t no, bool on)
 {
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x84);
-	Wire.send(no);
-	Wire.send((uint8_t)on);
+	Wire.write(0x84);
+	Wire.write(no);
+	Wire.write((uint8_t)on);
 	Wire.endTransmission();
 }
 
 void TWIKeyboard::dimLed(uint8_t no, uint8_t brightness)
 {
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x85);
-	Wire.send(no);
-	Wire.send(brightness);
+	Wire.write(0x85);
+	Wire.write(no);
+	Wire.write(brightness);
 	Wire.endTransmission();
 }
 
@@ -85,9 +85,9 @@ void TWIKeyboard::dimLed(uint8_t no, uint8_t brightness)
 void TWIKeyboard::setKeyRepeat(uint8_t button, uint8_t mode)
 {
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x92);
-	Wire.send(button);
-	Wire.send(mode);
+	Wire.write(0x92);
+	Wire.write(button);
+	Wire.write(mode);
 	Wire.endTransmission();
 }
 
@@ -95,10 +95,10 @@ uint8_t TWIKeyboard::getKeyUp()
 {
 	uint8_t rdata = 0;
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x90);
+	Wire.write(0x90);
 	Wire.endTransmission();
 	Wire.requestFrom(m_addr, 1);
-	if (Wire.available()) rdata = Wire.receive();
+	if (Wire.available()) rdata = Wire.read();
 	return rdata;
 }
 
@@ -106,10 +106,10 @@ uint8_t TWIKeyboard::getKeyDown()
 {
 	uint8_t rdata = 0;
 	Wire.beginTransmission(m_addr);
-	Wire.send(0x91);
+	Wire.write(0x91);
 	Wire.endTransmission();
 	Wire.requestFrom(m_addr, 1);
-	if (Wire.available()) rdata = Wire.receive();
+	if (Wire.available()) rdata = Wire.read();
 	return rdata;
 }
 

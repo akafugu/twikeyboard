@@ -16,7 +16,7 @@
 #ifndef TWIKEYBOARD_H
 #define TWIKEYBOARD_H
 
-#include <WProgram.h>
+#include <Arduino.h>
 #include <../Wire/Wire.h>
 
 #define BUTTON1 0
