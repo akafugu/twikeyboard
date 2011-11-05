@@ -15,8 +15,7 @@
  */
 
 /*
- * This example turns on all three LEDs and read the button status for keyup and 
- * keydown events.
+ * This example dim up all three LEDs on keydown event and dim down them on keyup. 
  */
 
 #include <Wire.h>
@@ -34,9 +33,7 @@ void setup()
   Serial.println("Keyboard Test");
 
   keyb.begin();
-  keyb.setLed(LED1, 100); // Brigtness of a led is a value between 0-100
-  keyb.setLed(LED2, 100);
-  keyb.setLed(LED3, 100);
+  keyb.clearLeds(); // Turn of all leds
 }
 
 void loop()
@@ -46,6 +43,9 @@ void loop()
   {
     Serial.print("Keydown event: 0b");
     Serial.println(keydown, BIN);
+    keyb.dimLed(LED1, 100); // Brigtness of a led is a value between 0-100
+    keyb.dimLed(LED2, 100);
+    keyb.dimLed(LED3, 100);
   }
   
   uint8_t keyup = keyb.getKeyUp();
@@ -53,6 +53,9 @@ void loop()
   {
     Serial.print("Keyup event: 0b");
     Serial.println(keyup, BIN);
+    keyb.dimLed(LED1, 0);
+    keyb.dimLed(LED2, 0);
+    keyb.dimLed(LED3, 0);
   }
 }
 

@@ -15,8 +15,8 @@
  */
 
 /*
- * This example turns on all three LEDs and read the button status for keyup and 
- * keydown events.
+ * This example turns on all three LEDs, sets keyrepeat on all buttons and read status 
+ * for keyup and keydown events.
  */
 
 #include <Wire.h>
@@ -34,9 +34,14 @@ void setup()
   Serial.println("Keyboard Test");
 
   keyb.begin();
-  keyb.setLed(LED1, 100); // Brigtness of a led is a value between 0-100
+  keyb.setLed(LED1, 100);
   keyb.setLed(LED2, 100);
   keyb.setLed(LED3, 100);
+  keyb.setKeyRepeat(BUTTON1, KEYREPEAT_SLOW);
+  keyb.setKeyRepeat(BUTTON2, KEYREPEAT_MEDIUMSLOW);
+  keyb.setKeyRepeat(BUTTON3, KEYREPEAT_MEDIUM);
+  keyb.setKeyRepeat(BUTTON4, KEYREPEAT_MEDIUMFAST);
+  keyb.setKeyRepeat(BUTTON5, KEYREPEAT_FAST);
 }
 
 void loop()
