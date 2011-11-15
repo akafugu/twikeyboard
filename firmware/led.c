@@ -41,7 +41,7 @@ void led_init(void)
 
 void led_clear(void)
 {
-	for(uint8_t i = LED1; i <= LED3; i++)
+	for(uint8_t i = LED1; i <= MAX_LED; i++)
 	{
 		brightness[i] = 0;
 		set_value[i] = 0;

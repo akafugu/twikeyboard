@@ -24,6 +24,8 @@
 #include "led.h"
 #include "button.h"
 
+#define FIRMWARE_REVISION 1
+
 // To support both ATTiny2313 and ATMegaXX8
 #ifndef TIMSK0
 #define TIMSK0 TIMSK
@@ -134,6 +136,9 @@ void processTWI( void )
 		break;
 	case 0x85: // Dim up/down led to specific value, p1=led, p2=value to dim to
 		dim_led(usiTwiReceiveByte(),usiTwiReceiveByte());
+		break;
+	case 0x86: // get firmware revision
+		usiTwiTransmitByte(FIRMWARE_REVISION);
 		break;
 	case 0x90: // get keyUp Event
 		usiTwiTransmitByte(getKeyUp());

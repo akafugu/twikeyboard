@@ -44,9 +44,6 @@ void TWIKeyboard::begin()
 	Wire.write(0xFF);
 	Wire.write(0xFF);
 	Wire.write(0xFF);
-	Wire.endTransmission();
-	// Send reset command
-	Wire.beginTransmission(m_addr);
 	Wire.write(0xFE); // reset
 	Wire.endTransmission();	
 }
